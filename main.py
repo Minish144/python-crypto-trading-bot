@@ -7,6 +7,7 @@ from strategies.grid import Grid
 from strategies.ichimoku import Ichimoku
 from strategies.macd import MACD
 from strategies.pumpanddump import PumpAndDump
+from strategies.puremorning import PureMorning
 from strategies.rsi import RSI
 from strategies.rsifutures import RSIFutures
 
@@ -23,15 +24,13 @@ kucoin_symbols = [
 ]
 
 binance_symbols = [
-    'BTC-USDT',
-    'ETH-USDT',
+    'DASH-USDT'
 ]
 
 symbols = binance_symbols
 
 for symbol in symbols:
-    s.add_price_event(Doji.price_event, symbol, '1d', Doji.init)
+    s.add_price_event(PureMorning.price_event, symbol, '4h', PureMorning.init)
     print("Added", symbol)
 
-s.backtest(initial_values={'USDT': 100 * len(symbols)}, to='1y')
-# s.backtest(initial_values={'USDT': 100 * len(symbols)}, start_date=1661620392, end_date=1677172392)
+s.backtest(initial_values={'USDT': 100 * len(symbols)}, to='3M')
